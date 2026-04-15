@@ -15,7 +15,7 @@ export const SITE_CONFIG = {
   googleSheetsWebhook: "https://script.google.com/macros/s/AKfycbzK7s-AogJiy71yFBef-LvJJMP_x_vroeCcc94uZ2YClcH79QjmqGykfz4vmCuj4VB_/exec",
   // TikTok Pixel ID — set this after creating your pixel in TikTok Ads Manager
   // See TIKTOK_SETUP.md for instructions
-  tiktokPixelId: "",
+  tiktokPixelId: "D7FLOLRC77U2ODPGJE6G",
   qualificationRequirements: [
     "A valid National ID",
     "A guarantor",
