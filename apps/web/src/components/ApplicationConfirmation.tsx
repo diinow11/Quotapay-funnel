@@ -56,23 +56,26 @@ export function ApplicationConfirmation({ fullName, idNumber, productName, onRes
         {callback.detail}
       </div>
 
-      {/* WhatsApp reminder */}
-      <div className="mt-8 w-full max-w-sm rounded-2xl border-2 border-green-200 bg-green-50 p-5">
-        <div className="flex items-center gap-3 mb-2">
-          <MessageCircle className="h-5 w-5 text-green-600" />
-          <h3 className="text-base font-bold text-gray-900">WhatsApp opened!</h3>
-        </div>
-        <p className="text-sm text-gray-600">
-          Attach your <strong>M-Pesa or bank statement PDF</strong> (last 3 months) and the <strong>passcode</strong> to open it, then tap Send.
+      {/* WhatsApp CTA for sending statement */}
+      <div className="mt-8 w-full max-w-sm rounded-2xl border-2 border-green-200 bg-green-50 p-6">
+        <h3 className="text-lg font-bold text-gray-900 mb-2">
+          One last step!
+        </h3>
+        <p className="text-sm text-gray-600 mb-4">
+          Send your <strong>M-Pesa or bank statement</strong> (last 3 months) via WhatsApp to complete your application. Include the <strong>passcode</strong> to open the PDF.
         </p>
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-green-600 hover:text-green-700"
+          className="flex w-full items-center justify-center gap-3 rounded-full bg-[#25D366] py-4 text-base font-bold text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
         >
-          Didn't open? Tap here →
+          <MessageCircle className="h-5 w-5" />
+          Send Statement on WhatsApp
         </a>
+        <p className="mt-3 text-xs text-gray-500">
+          The message is pre-filled with your details. Just attach your PDF and send.
+        </p>
       </div>
 
       {/* What happens next */}

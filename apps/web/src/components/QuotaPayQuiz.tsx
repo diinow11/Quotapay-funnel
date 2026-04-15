@@ -78,12 +78,6 @@ export function QuotaPayQuiz() {
 
     trackFunnelStep(6, "submitted");
     trackApplicationSubmitted({ id: selectedProduct.id, name: selectedProduct.name, price: selectedProduct.price });
-
-    // Auto-open WhatsApp with pre-filled message
-    const msg = `Hi, I just submitted my hire purchase application for ${selectedProduct.name}.\n\nName: ${personalDetails.fullName}\nID: ${personalDetails.idNumber}\n\nI'm sending my M-Pesa/bank statement (last 3 months) and the passcode to open it.`;
-    const waUrl = `https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`;
-    window.open(waUrl, "_blank");
-
     setIsSubmitting(false);
     setStep("confirmed");
   };
