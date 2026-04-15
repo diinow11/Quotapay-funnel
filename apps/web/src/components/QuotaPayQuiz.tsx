@@ -143,8 +143,8 @@ export function QuotaPayQuiz() {
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {cat.image ? (
-                    <div className="w-full h-16 sm:h-20 rounded-lg bg-gray-50 overflow-hidden flex items-center justify-center">
-                      <img src={cat.image} alt={cat.name} className="w-full h-full object-contain" loading="lazy" />
+                    <div className="w-full h-20 sm:h-24 rounded-lg bg-gray-100 overflow-hidden -mx-3 -mt-3 w-[calc(100%+1.5rem)]">
+                      <img src={cat.image} alt={cat.name} className="w-full h-full object-cover" loading="lazy" />
                     </div>
                   ) : (
                     IconComponent && <IconComponent className="h-8 w-8 text-green-600" />
@@ -181,10 +181,10 @@ export function QuotaPayQuiz() {
                 className="w-full rounded-2xl border-2 border-gray-200 bg-white p-5 text-left transition-all hover:border-green-400 hover:shadow-lg active:scale-[0.98] animate-in fade-in slide-in-from-bottom-2 duration-300 fill-mode-both"
                 style={{ animationDelay: `${index * 30}ms` }}
               >
-                {/* Big product image */}
+                {/* Product image */}
                 {product.image && (
-                  <div className="w-full h-40 sm:h-48 rounded-lg bg-gray-50 overflow-hidden flex items-center justify-center mb-3">
-                    <img src={product.image} alt={product.name} className="w-full h-full object-contain p-2" loading="lazy" />
+                  <div className="w-full h-48 sm:h-56 rounded-xl bg-gray-100 overflow-hidden mb-3 -mx-5 -mt-5 w-[calc(100%+2.5rem)]">
+                    <img src={product.image} alt={product.name} className="w-full h-full object-cover" loading="lazy" />
                   </div>
                 )}
 
