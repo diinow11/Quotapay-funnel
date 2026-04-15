@@ -37,58 +37,51 @@ export function ApplicationConfirmation({ fullName, idNumber, productName, onRes
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 py-10 bg-white min-h-dvh flex flex-col items-center justify-center text-center">
-      <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
-        <CheckCircle className="h-10 w-10 text-green-600" />
+      {/* Warning icon instead of success — application is NOT complete yet */}
+      <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-amber-100">
+        <Clock className="h-10 w-10 text-amber-600" />
       </div>
 
       <h1 className="text-3xl font-bold text-gray-900">
-        Application Submitted!
+        Almost Done, {fullName}!
       </h1>
 
-      <p className="mt-4 max-w-md text-lg text-gray-600">
-        Thank you <strong>{fullName}</strong>. Our team will call you{" "}
-        <strong className="text-green-600">{callback.timeframe}</strong>{" "}
-        to confirm your agreement and arrange delivery.
+      <p className="mt-3 max-w-md text-lg text-gray-700">
+        Your details are saved. To <strong>complete your application</strong>, send your M-Pesa or bank statement below.
       </p>
 
-      <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-green-50 border border-green-200 px-4 py-2 text-sm text-green-700">
-        <Clock className="h-4 w-4" />
-        {callback.detail}
+      {/* Urgent warning */}
+      <div className="mt-4 w-full max-w-sm rounded-xl border-2 border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-800 font-medium">
+        Your application <strong>cannot be processed</strong> without your statement. Send it now to avoid delays.
       </div>
 
-      {/* WhatsApp CTA for sending statement */}
-      <div className="mt-8 w-full max-w-sm rounded-2xl border-2 border-green-200 bg-green-50 p-6">
-        <h3 className="text-lg font-bold text-gray-900 mb-2">
-          One last step!
-        </h3>
-        <p className="text-sm text-gray-600 mb-4">
-          Send your <strong>M-Pesa or bank statement</strong> (last 3 months) via WhatsApp to complete your application. Include the <strong>passcode</strong> to open the PDF.
-        </p>
+      {/* Big WhatsApp CTA — the main action */}
+      <div className="mt-6 w-full max-w-sm">
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex w-full items-center justify-center gap-3 rounded-full bg-[#25D366] py-4 text-base font-bold text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
+          className="flex w-full items-center justify-center gap-3 rounded-full bg-[#25D366] py-5 text-lg font-bold text-white shadow-xl transition-transform hover:scale-105 active:scale-95 animate-[pulse-grow_2s_ease-in-out_infinite]"
         >
-          <MessageCircle className="h-5 w-5" />
-          Send Statement on WhatsApp
+          <MessageCircle className="h-6 w-6" />
+          Send Statement Now
         </a>
-        <p className="mt-3 text-xs text-gray-500">
-          The message is pre-filled with your details. Just attach your PDF and send.
+        <p className="mt-3 text-center text-sm text-gray-500">
+          Attach your <strong>M-Pesa/bank statement PDF</strong> (last 3 months) and the <strong>passcode</strong> to open it.
         </p>
       </div>
 
-      {/* What happens next */}
-      <div className="mt-6 w-full max-w-sm rounded-xl border border-gray-200 bg-gray-50 p-5 text-left">
-        <h3 className="font-bold text-gray-900 mb-3">What happens next?</h3>
+      {/* After they send — what happens */}
+      <div className="mt-8 w-full max-w-sm rounded-xl border border-gray-200 bg-gray-50 p-5 text-left">
+        <h3 className="font-bold text-gray-900 mb-3">After you send your statement:</h3>
         <ol className="space-y-3 text-sm text-gray-600">
           <li className="flex gap-3">
             <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-600 text-xs font-bold text-white">1</span>
-            <span>Send your statement on WhatsApp</span>
+            <span>We review your application and documents</span>
           </li>
           <li className="flex gap-3">
             <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-600 text-xs font-bold text-white">2</span>
-            <span>We review your application and call you <strong>{callback.timeframe}</strong></span>
+            <span>We call you <strong>{callback.timeframe}</strong> with a decision</span>
           </li>
           <li className="flex gap-3">
             <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-600 text-xs font-bold text-white">3</span>
