@@ -38,3 +38,5 @@ npm-debug.log*
 .sisyphus/
 web-dev.log
 perfume images/
+perfume images/
+imgs/
