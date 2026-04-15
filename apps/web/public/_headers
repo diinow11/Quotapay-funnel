@@ -1,0 +1,27 @@
+# HTML pages (always revalidate — tiny files, instant on Cloudflare edge)
+/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Astro hashed assets (immutable, safe to cache forever)
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images
+/quiz/*
+  Cache-Control: public, max-age=2592000
+/perfumes/*
+  Cache-Control: public, max-age=2592000
+/testimonials/*
+  Cache-Control: public, max-age=2592000
+/slider/*
+  Cache-Control: public, max-age=2592000
+/*.webp
+  Cache-Control: public, max-age=2592000
+
+# Videos
+/*.mp4
+  Cache-Control: public, max-age=2592000
+
+# Fonts (rarely change)
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable

@@ -1,0 +1,17 @@
+{
+  "extends": "@workspace/typescript-config/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@/*": ["src/*"],
+      "@workspace/ui/*": ["../../packages/ui/src/*"]
+    },
+    "types": ["astro/client"]
+  },
+  "include": ["src", "astro.config.mjs"],
+  "exclude": ["node_modules"]
+}

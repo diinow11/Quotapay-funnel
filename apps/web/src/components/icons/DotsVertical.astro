@@ -1,0 +1,24 @@
+---
+interface Props {
+  size?: string | number
+  className?: string
+}
+
+const { size = 18, className = "" } = Astro.props as Props
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  class={className}
+  aria-hidden="true"
+  focusable="false"
+>
+  <circle cx="12" cy="5" r="2" fill="currentColor" />
+  <circle cx="12" cy="12" r="2" fill="currentColor" />
+  <circle cx="12" cy="19" r="2" fill="currentColor" />
+</svg>
+

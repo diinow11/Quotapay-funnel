@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/BaseLayout.astro"
+---
+
+<Layout title="Page Not Found | QuotaPay">
+  <div class="flex min-h-[60vh] flex-col items-center justify-center px-6 text-center">
+    <h1 class="text-6xl font-bold text-gray-900">404</h1>
+    <p class="mt-4 text-lg text-gray-600">Page not found.</p>
+    <div class="mt-8 flex gap-4">
+      <a
+        href="/"
+        class="inline-flex items-center justify-center rounded-full bg-green-600 px-6 py-3 font-bold text-white transition-transform hover:scale-105 active:scale-95 hover:bg-green-700"
+      >
+        Go Home
+      </a>
+      <a
+        href="/products"
+        class="inline-flex items-center justify-center rounded-full border-2 border-green-600 px-6 py-3 font-bold text-green-600 transition-transform hover:scale-105 active:scale-95"
+      >
+        Browse Products
+      </a>
+    </div>
+  </div>
+</Layout>

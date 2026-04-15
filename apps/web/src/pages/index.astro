@@ -1,0 +1,10 @@
+---
+import Layout from "../layouts/BaseLayout.astro"
+import { QuotaPayQuiz } from "../components/QuotaPayQuiz"
+import FloatingWhatsAppButton from "../components/FloatingWhatsAppButton"
+---
+
+<Layout>
+  <QuotaPayQuiz client:load />
+  <FloatingWhatsAppButton client:idle />
+</Layout>
