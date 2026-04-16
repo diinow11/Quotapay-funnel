@@ -6,14 +6,13 @@ import { initTikTok, trackSelectCategory, trackSelectProduct, trackSelectPlan, t
 import { submitApplication } from "../lib/submit-application";
 import { PersonalDetailsStep } from "./ApplicationForm";
 import { ApplicationReview } from "./ApplicationReview";
-import { ApplicationConfirmation } from "./ApplicationConfirmation";
 
 const ICON_MAP: Record<string, React.ElementType> = {
   Tv, Refrigerator, Snowflake, WashingMachine, CookingPot, AirVent,
   Microwave, Speaker, Sparkles, Flame, GlassWater, IceCreamCone,
 };
 
-type FlowStep = "category" | "product" | "plan" | "crb" | "crb_disqualified" | "details" | "review" | "confirmed";
+type FlowStep = "category" | "product" | "plan" | "crb" | "crb_disqualified" | "details" | "review";
 
 const TOTAL_STEPS = 6;
 
@@ -79,20 +78,8 @@ export function QuotaPayQuiz() {
     trackFunnelStep(6, "submitted");
     trackApplicationSubmitted({ id: selectedProduct.id, name: selectedProduct.name, price: selectedProduct.price });
     setIsSubmitting(false);
-    setStep("confirmed");
+    // No step change — WhatsApp opens via the <a> tag in ApplicationReview
   };
-
-  // ── Confirmation ──
-  if (step === "confirmed" && personalDetails && selectedProduct) {
-    return (
-      <ApplicationConfirmation
-        fullName={personalDetails.fullName}
-        idNumber={personalDetails.idNumber}
-        productName={selectedProduct.name}
-        onRestart={handleRestart}
-      />
-    );
-  }
 
   // ── Quiz Steps ──
   const categoryProducts = selectedCategory ? getProductsByCategory(selectedCategory) : [];
@@ -390,8 +377,8 @@ export function QuotaPayQuiz() {
         />
       )}
 
-      {/* Back Button — hide on confirmed and review (review has its own back) */}
-      {step !== "confirmed" && step !== "crb_disqualified" && step !== "review" && step !== "category" && (
+      {/* Back Button — hide on review (has its own back) and disqualified */}
+      {step !== "crb_disqualified" && step !== "review" && step !== "category" && (
         <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-gray-200 bg-white/95 p-4 backdrop-blur-md shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
           <div className="mx-auto max-w-2xl flex justify-center">
             <button
