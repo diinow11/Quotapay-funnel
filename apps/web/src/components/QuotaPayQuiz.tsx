@@ -12,9 +12,9 @@ const ICON_MAP: Record<string, React.ElementType> = {
   Microwave, Speaker, Sparkles, Flame, GlassWater, IceCreamCone,
 };
 
-type FlowStep = "category" | "product" | "plan" | "crb" | "crb_disqualified" | "details" | "review";
+type FlowStep = "category" | "product" | "plan" | "crb" | "crb_disqualified" | "location" | "location_disqualified" | "details" | "review";
 
-const TOTAL_STEPS = 6;
+const TOTAL_STEPS = 7;
 
 export function QuotaPayQuiz() {
   const [step, setStep] = React.useState<FlowStep>("category");
@@ -34,8 +34,9 @@ export function QuotaPayQuiz() {
       case "product": return 2;
       case "plan": return 3;
       case "crb": return 4;
-      case "details": return 5;
-      case "review": return 6;
+      case "location": return 5;
+      case "details": return 6;
+      case "review": return 7;
       default: return 0;
     }
   })();
@@ -48,8 +49,10 @@ export function QuotaPayQuiz() {
       case "product": setStep("category"); break;
       case "plan": setStep("product"); break;
       case "crb": setStep("plan"); break;
-      case "details": setStep("crb"); break;
+      case "location": setStep("crb"); break;
+      case "details": setStep("location"); break;
       case "review": setStep("details"); break;
+
     }
   };
 
@@ -75,7 +78,7 @@ export function QuotaPayQuiz() {
       crbStatus,
     });
 
-    trackFunnelStep(6, "submitted");
+    trackFunnelStep(7, "submitted");
     trackApplicationSubmitted({ id: selectedProduct.id, name: selectedProduct.name, price: selectedProduct.price });
     setIsSubmitting(false);
     // No step change — WhatsApp opens via the <a> tag in ApplicationReview
@@ -284,7 +287,7 @@ export function QuotaPayQuiz() {
                 setCrbStatus("no");
                 trackCrbAnswer("no");
                 trackFunnelStep(4, "crb");
-                setStep("details");
+                setStep("location");
               }}
               className="w-full rounded-xl border-2 border-gray-200 bg-white p-6 text-center transition-all hover:border-green-400 hover:shadow-md active:scale-[0.98] animate-in fade-in zoom-in-95 duration-500"
             >
@@ -351,12 +354,84 @@ export function QuotaPayQuiz() {
         </div>
       )}
 
-      {/* ── Step 5: Personal Details ── */}
+      {/* ── Step 5: Location ── */}
+      {step === "location" && (
+        <>
+          <div className="mb-6 text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+              Are you located in{" "}
+              <span className="text-green-600">Nairobi?</span>
+            </h1>
+            <p className="mt-2 text-gray-600">
+              We currently deliver and operate within Nairobi only.
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            <button
+              onClick={() => {
+                trackFunnelStep(5, "location_nairobi");
+                setStep("details");
+              }}
+              className="w-full rounded-xl border-2 border-gray-200 bg-white p-6 text-center transition-all hover:border-green-400 hover:shadow-md active:scale-[0.98] animate-in fade-in zoom-in-95 duration-500"
+            >
+              <span className="text-xl font-bold text-gray-900">Yes, I'm in Nairobi</span>
+              <p className="mt-1 text-sm text-gray-500">I live or work in Nairobi</p>
+            </button>
+
+            <button
+              onClick={() => {
+                trackFunnelStep(5, "location_outside");
+                setStep("location_disqualified");
+              }}
+              className="w-full rounded-xl border-2 border-gray-200 bg-white p-6 text-center transition-all hover:border-amber-400 hover:shadow-md active:scale-[0.98] animate-in fade-in zoom-in-95 duration-500 delay-75"
+            >
+              <span className="text-xl font-bold text-gray-900">No, I'm outside Nairobi</span>
+              <p className="mt-1 text-sm text-gray-500">I'm located in another county</p>
+            </button>
+          </div>
+        </>
+      )}
+
+      {/* ── Location Disqualified ── */}
+      {step === "location_disqualified" && (
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 text-center">
+          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-red-100">
+            <svg className="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+            </svg>
+          </div>
+          <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
+            We're not in your area yet
+          </h1>
+          <p className="mt-4 text-gray-600 max-w-md mx-auto">
+            QuotaPay currently operates in <strong>Nairobi only</strong>. We're working on expanding to other counties soon.
+          </p>
+          <div className="mt-8 rounded-xl border border-gray-200 bg-gray-50 p-5 text-left max-w-sm mx-auto">
+            <h3 className="font-bold text-gray-900 mb-2">We'll notify you when we expand!</h3>
+            <p className="text-sm text-gray-600">
+              Follow us on social media for updates on when QuotaPay comes to your area.
+            </p>
+          </div>
+          <p className="mt-6 text-sm text-gray-500">
+            Questions? Call us: {SITE_CONFIG.phone}
+          </p>
+          <button
+            onClick={handleRestart}
+            className="mt-6 inline-flex items-center gap-2 rounded-full border-2 border-gray-300 px-6 py-3 text-sm font-semibold text-gray-600 transition-all hover:border-gray-400 active:scale-95"
+          >
+            Start Over
+          </button>
+        </div>
+      )}
+
+      {/* ── Step 6: Personal Details ── */}
       {step === "details" && (
         <PersonalDetailsStep
           onSubmit={(data) => {
             setPersonalDetails(data);
-            trackFunnelStep(5, "details");
+            trackFunnelStep(6, "details");
             setStep("review");
           }}
         />
@@ -378,7 +453,7 @@ export function QuotaPayQuiz() {
       )}
 
       {/* Back Button — hide on review (has its own back) and disqualified */}
-      {step !== "crb_disqualified" && step !== "review" && step !== "category" && (
+      {step !== "crb_disqualified" && step !== "location_disqualified" && step !== "review" && step !== "category" && (
         <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-gray-200 bg-white/95 p-4 backdrop-blur-md shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
           <div className="mx-auto max-w-2xl flex justify-center">
             <button
